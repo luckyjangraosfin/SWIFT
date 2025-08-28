@@ -114,10 +114,13 @@ def make_pp(uumid, amt, ccy, mt, vdate, corr, scenario="", creation_time=None):
         "CREATION TIME": creation_time if creation_time else datetime.today().strftime("%H:%M:%S"),
     }
 
-# Need to change and append custom text in Reference_number here in CBS.
-def make_cbs(uumid,amt,ccy,scenario="",creation_time=None):
+# CBS data
+def make_cbs(uumid,amt,ccy,vdate,scenario="",creation_time=None):
     return{
         "SCENARIO":scenario,
+        "AUTH_DATE":vdate,
+        "VALUE_DATE":vdate,
+        "ACCOUNT_NUMBER":random.randint(10**11,999999999999),
         "CBS_CCY":ccy,
         "CBS_AMOUNT":amt,
         "REFERENCE_NUMBER":uumid[15:35],
@@ -143,7 +146,7 @@ def generate_records():
 
     for i in range(10):
         uumid, amt, ccy, mt, vdate, corr=exposure_details()
-        cbs_records.append(make_cbs(uumid,amt,ccy,"Scenario 1",datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+        cbs_records.append(make_cbs(uumid,amt,ccy,vdate,"Scenario 1",datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
         pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr,"Scenario 1", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
         swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 1", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
