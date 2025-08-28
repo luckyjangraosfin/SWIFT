@@ -1,5 +1,6 @@
 from swiftBaseClass import swiftBaseClass as sbc
 
+
 if __name__ == "__main__":
     generator = sbc()
 

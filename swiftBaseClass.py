@@ -131,11 +131,8 @@ class swiftBaseClass:
             "CREATION_DATE": datetime.today().strftime("%d-%m-%Y"),
             "CREATION_TIME": creation_time if creation_time else datetime.today().strftime("%H:%M:%S")
         }
-
-    def generate_records(self):
-        swift_records, pp_records, cbs_records = [], [], []
-
-        def exposure_details():
+    
+    def exposure_details(self):
             mt = random.choice(list(self.EXPOSURE_MT.keys()))
             ccy = random.choice(["USD", "EUR", "INR", "GBP"])
             amt = round(random.uniform(1000, 9999), 2)
@@ -144,8 +141,11 @@ class swiftBaseClass:
             corr = uumid[1:9] + uumid[8:11]
             return uumid, amt, ccy, mt, vdate, corr
 
+    def generate_records(self):
+        swift_records, pp_records, cbs_records = [], [], []
+
         for i in range(10):
-            uumid, amt, ccy, mt, vdate, corr = exposure_details()
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details()
             cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 1", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 1", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 1", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
