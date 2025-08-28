@@ -135,7 +135,9 @@ def generate_scenarios():
         vdate = datetime.today().strftime("%y%m%d")
         uumid = random_string("UUM", 25)
         corr = uumid[1:9] + uumid[8:11]
-        return uumid, None, None, mt, vdate, corr, None
+        evt_ref = f"CR{random.randint(1,100):03d}" 
+
+        return uumid, None, None, mt, vdate, corr, evt_ref
 
     # Scenario 1: One-to-one (5 records)
     for _ in range(5):
@@ -241,9 +243,9 @@ def generate_scenarios():
     return pd.DataFrame(swift_records), pd.DataFrame(pp_records)
 
 
-#
+
 swift_df, pp_df = generate_scenarios()
 swift_df.to_excel("swift_scenarios_7.xlsx", index=False)
 pp_df.to_excel("pp_scenarios_7.xlsx", index=False)
 
-print("Lucky: Generated SWIFT & PP data with all scenarios.")
+print("LJ: Generated SWIFT & PP data with all scenarios.")
