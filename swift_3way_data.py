@@ -12,23 +12,256 @@ class many103data(sbc):
     def generate_records(self):
         swift_records, pp_records, cbs_records = [], [], []
 
-        # Happy Case Scenario, Many CBS entry sum(cbsamount)>=swift amount=ppamount(Reconciled Case)
+        # Happy Case Scenario, Many/one CBS entry sum(cbsamount)>=swift amount=ppamount(Reconciled Case)
         for i in range(10):
             uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
-            amt=int(amt)
+            
+            cbs_random_split=random.randint(1,3)
 
-            cbs_random_split=random.randint(2,4)
+            if cbs_random_split!=1:
+                amt=int(amt)
 
-            cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
-            cut_points = [0] + cut_points + [amt]
-            amt_split = [cut_points[i+1] - cut_points[i] for i in range(len(cut_points)-1)]
+                cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
+                cut_points = [0] + cut_points + [amt]
+                amt_split = [cut_points[i+1] - cut_points[i] for i in range(len(cut_points)-1)]
 
-            for split_amt in amt_split:
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                for split_amt in amt_split:
+                    cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            else :
+                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
+        # Swift Not present, Many/one CBS entry
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            cbs_random_split=random.randint(1,3)
+
+            if cbs_random_split!=1:
+                amt=int(amt)
+
+                cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
+                cut_points = [0] + cut_points + [amt]
+                amt_split = [cut_points[i+1] - cut_points[i] for i in range(len(cut_points)-1)]
+
+                for split_amt in amt_split:
+                    cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            else :
+                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+
+        # PP Not present, Many/one CBS entry, Swift Present
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            cbs_random_split=random.randint(1,3)
+
+            if cbs_random_split!=1:
+                amt=int(amt)
+
+                cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
+                cut_points = [0] + cut_points + [amt]
+                amt_split = [cut_points[i+1] - cut_points[i] for i in range(len(cut_points)-1)]
+
+                for split_amt in amt_split:
+                    cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            else :
+                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+
+        # PP 2 entries, Swift 1 entry, CBS 1/many entry
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            cbs_random_split=random.randint(1,3)
+
+            if cbs_random_split!=1:
+                amt=int(amt)
+
+                cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
+                cut_points = [0] + cut_points + [amt]
+                amt_split = [cut_points[i+1] - cut_points[i] for i in range(len(cut_points)-1)]
+
+                for split_amt in amt_split:
+                    cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            else :
+                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) #Adjust Time/Money
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+
+        # PP 2 entries, Swift Not present, Many/one CBS entry
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            cbs_random_split=random.randint(1,3)
+
+            if cbs_random_split!=1:
+                amt=int(amt)
+
+                cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
+                cut_points = [0] + cut_points + [amt]
+                amt_split = [cut_points[i+1] - cut_points[i] for i in range(len(cut_points)-1)]
+
+                for split_amt in amt_split:
+                    cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            else :
+                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) #Adjust Time/Money
+
+        # Swift 2 entry, PP 1 entry, CBS 1/many entry
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            cbs_random_split=random.randint(1,3)
+
+            if cbs_random_split!=1:
+                amt=int(amt)
+
+                cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
+                cut_points = [0] + cut_points + [amt]
+                amt_split = [cut_points[i+1] - cut_points[i] for i in range(len(cut_points)-1)]
+
+                for split_amt in amt_split:
+                    cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            else :
+                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) # Alter Time
+
+        # Swift 2 entry, PP no entry, CBS 1/many entry
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            cbs_random_split=random.randint(1,3)
+
+            if cbs_random_split!=1:
+                amt=int(amt)
+
+                cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
+                cut_points = [0] + cut_points + [amt]
+                amt_split = [cut_points[i+1] - cut_points[i] for i in range(len(cut_points)-1)]
+
+                for split_amt in amt_split:
+                    cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            else :
+                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) # Alter Time
+
+        # Swift 2 entry, PP 2 entry, CBS 1/many entry
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            cbs_random_split=random.randint(1,3)
+
+            if cbs_random_split!=1:
+                amt=int(amt)
+
+                cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
+                cut_points = [0] + cut_points + [amt]
+                amt_split = [cut_points[i+1] - cut_points[i] for i in range(len(cut_points)-1)]
+
+                for split_amt in amt_split:
+                    cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            else :
+                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) # Alter time
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) # Alter Time
+
+        
+        # Swift 1 entry, PP 1 entry, No CBS entries
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) 
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+
+        # Swift no entry, PP 1 entry, No CBS entries
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) 
+            
+        # Swift 1 entry, PP no entry, No CBS entries
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+
+        # Swift 1 entry, PP 2 entry, No CBS entries
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) 
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) # adjust time
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+
+        # Swift no entry, PP 2 entry, No CBS entries
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) 
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) # adjust time
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+        
+        # Swift 2 entry, PP 1 entry, No CBS entries
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) #Adjust Time
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) 
+
+        # Swift 2 entry, PP no entry, No CBS entries
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) #Adjust Time
+
+        # Swift 2 entry, PP 2 entry, No CBS entries
+        for i in range(10):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
+            
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) #Adjust Time
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) 
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) # adjust time
+
+
         return pd.DataFrame(cbs_records), pd.DataFrame(swift_records), pd.DataFrame(pp_records)
+
+
+
+
+
+
+
+
+
+
 
 class many7seriesdata(sbc):
     def exposure_details(self):
@@ -71,16 +304,7 @@ class many7seriesdata(sbc):
             swift_records.append(self.make_swift(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 4", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 4", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
-        # Only Higher 7XX present with same amount (Unreconciled Case)
-        for i in range(3):
-            uumid, amt, ccy, mt, vdate, corr = self.exposure_details()
-            
-            outer_mt_index=random.randint(0,len(mt)-1)
-            
-            cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 5", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
-            swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][1], vdate, corr, "Scenario 5", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
-            pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 5", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
-        
+
         # Only Lower 7XX present with same amount, also CBS has multiple amounts (sum of CBS amount>=swiftamount) (Reconciled Case)
         for i in range(15):
             uumid, amt, ccy, mt, vdate, corr = self.exposure_details()
@@ -96,26 +320,8 @@ class many7seriesdata(sbc):
 
             for split_amt in amt_split:
                 cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 6", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
-            swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][0], vdate, corr, "Scenario 6", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 6", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 6", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
-
-        # Only Higher 7XX present with same amount, also CBS has multiple amounts (Unreconciled Case)
-        for i in range(3):
-            uumid, amt, ccy, mt, vdate, corr = self.exposure_details()
-            
-            outer_mt_index=random.randint(0,len(mt)-1)
-            amt=int(amt)
-
-            cbs_random_split=random.randint(2,3)
-
-            cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
-            cut_points = [0] + cut_points + [amt]
-            amt_split = [cut_points[i+1] - cut_points[i] for i in range(len(cut_points)-1)]
-
-            for split_amt in amt_split:
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 7", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
-            swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][1], vdate, corr, "Scenario 7", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
-            pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 7", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
         # Only Lower 7XX present with same amount, CBS not present (Unreconciled Case)
         for i in range(3):
@@ -123,7 +329,7 @@ class many7seriesdata(sbc):
             
             outer_mt_index=random.randint(0,len(mt)-1)
             
-            swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][0], vdate, corr, "Scenario 8", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 8", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 8", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
         # Swift not present, CBS single entry/multiple entry
@@ -181,7 +387,7 @@ class many7seriesdata(sbc):
             swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][0], vdate, corr, "Scenario 12", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
 
-        # PP not present, CBS single entry/multiple entry, Swift single both 7XX
+        # PP not present, CBS single entry/multiple entry, Swift both 7XX
         for i in range(5):
             uumid, amt, ccy, mt, vdate, corr = self.exposure_details()
 
@@ -204,14 +410,6 @@ class many7seriesdata(sbc):
             
             swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][0], vdate, corr, "Scenario 13", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][1], vdate, corr, "Scenario 13", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
-
-        # PP not present, CBS not present, Swift single Lower 7XX
-        for i in range(5):
-            uumid, amt, ccy, mt, vdate, corr = self.exposure_details()
-
-            outer_mt_index=random.randint(0,len(mt)-1)
-
-            swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][0], vdate, corr, "Scenario 14", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
         # PP not present, CBS not present, Swift both 7XX
         for i in range(5):
@@ -305,6 +503,14 @@ class many7seriesdata(sbc):
 
             pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 19", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 19", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) #Handle Time
+
+        # Swift not present, CBS not present, PP 1 entry
+        for i in range(3):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details()
+
+            outer_mt_index=random.randint(0,len(mt)-1)
+
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 19", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
         
         # Swift lower 7XX present, CBS not present, PP 2 entry
         for i in range(3):
