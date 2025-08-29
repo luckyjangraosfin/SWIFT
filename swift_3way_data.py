@@ -15,7 +15,7 @@ class many103data(sbc):
         for i in range(10):
             uumid, amt, ccy, mt, vdate, corr = self.exposure_details() 
             amt=int(amt)
-            
+
             cbs_random_split=random.randint(2,4)
 
             cut_points = sorted(random.sample(range(1, amt), cbs_random_split - 1))
@@ -28,6 +28,10 @@ class many103data(sbc):
             swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
         return pd.DataFrame(cbs_records), pd.DataFrame(swift_records), pd.DataFrame(pp_records)
+
+class many7seriesdata(sbc):
+    def exposure_details(self):
+        return super().exposure_details()
 
 if __name__ == "__main__":
     happygenerator = sbc()
