@@ -31,18 +31,37 @@ class many103data(sbc):
 
 class many7seriesdata(sbc):
     def exposure_details(self):
-        return super().exposure_details()
+        uumid, amt, ccy, mt, vdate, corr = super().exposure_details()  # random.choice(
+        mt=[[keys for keys,values in self.EXPOSURE_MT.items() if values==group] for group in set(self.EXPOSURE_MT.values()) if group not in ('GROUP1','GROUP4','GROUP6')]
+        
+        return uumid, amt, ccy, mt, vdate, corr
+    
+    def generate_records(self):
+        swift_records, pp_records, cbs_records = [], [], []
+        for i in range(20):
+            uumid, amt, ccy, mt, vdate, corr = self.exposure_details()
+            
+            outer_mt_index=random.randint(0,len(mt)-1)
+            
+            cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 3", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 3", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][1], vdate, corr, "Scenario 3", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 3", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+
+        return pd.DataFrame(cbs_records), pd.DataFrame(swift_records), pd.DataFrame(pp_records)
 
 if __name__ == "__main__":
     happygenerator = sbc()
     many103generator = many103data()
+    many7XXgenerator = many7seriesdata()
 
     cbs_df1, swift_df1, pp_df1 = happygenerator.generate_records()
     cbs_df2, swift_df2, pp_df2 = many103generator.generate_records()
+    cbs_df3, swift_df3, pp_df3 = many7XXgenerator.generate_records()
 
-    cbs_df = pd.concat([cbs_df1, cbs_df2], ignore_index=True)
-    swift_df = pd.concat([swift_df1, swift_df2], ignore_index=True)
-    pp_df = pd.concat([pp_df1, pp_df2], ignore_index=True)
+    cbs_df = pd.concat([cbs_df1, cbs_df2, cbs_df3], ignore_index=True)
+    swift_df = pd.concat([swift_df1, swift_df2, swift_df3], ignore_index=True)
+    pp_df = pd.concat([pp_df1, pp_df2, pp_df3], ignore_index=True)
 
     cbs_file_name, swift_file_name, pp_file_name = happygenerator.generate_file_names()
 
