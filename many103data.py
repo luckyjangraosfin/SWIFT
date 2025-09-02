@@ -29,7 +29,7 @@ class many103data(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
@@ -51,7 +51,7 @@ class many103data(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
@@ -72,7 +72,7 @@ class many103data(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
@@ -93,7 +93,7 @@ class many103data(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) #Adjust Time/Money
@@ -116,7 +116,7 @@ class many103data(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) #Adjust Time/Money
@@ -138,7 +138,7 @@ class many103data(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
@@ -161,7 +161,7 @@ class many103data(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) # Alter Time
@@ -183,7 +183,7 @@ class many103data(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 2", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) # Alter time
