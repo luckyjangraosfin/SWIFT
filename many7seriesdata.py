@@ -91,7 +91,7 @@ class many7seriesdata(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 10", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
@@ -114,7 +114,7 @@ class many7seriesdata(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 11", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 11", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 11", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][0], vdate, corr, "Scenario 11", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
@@ -146,7 +146,7 @@ class many7seriesdata(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 13", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 13", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 13", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][0], vdate, corr, "Scenario 13", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][1], vdate, corr, "Scenario 13", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
@@ -179,7 +179,7 @@ class many7seriesdata(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 16", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 16", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 16", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 16", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 16", datetime.now().strftime("%d-%m-%Y %H:%M:%S"))) #Handle Time
@@ -203,7 +203,7 @@ class many7seriesdata(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 17", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 17", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 17", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][0], vdate, corr, "Scenario 17", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt[outer_mt_index][0], vdate, corr, "Scenario 17", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
@@ -228,7 +228,7 @@ class many7seriesdata(sbc):
                     cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 18", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             else :
-                cbs_records.append(self.make_cbs(uumid, split_amt, ccy, vdate, "Scenario 18", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+                cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 18", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             
             swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][0], vdate, corr, "Scenario 18", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             swift_records.append(self.make_swift(uumid, None, None, mt[outer_mt_index][1], vdate, corr, "Scenario 18", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
