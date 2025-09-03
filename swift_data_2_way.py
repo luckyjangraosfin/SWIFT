@@ -138,94 +138,110 @@ def generate_scenarios():
         mt = random.choice(list(FREE_TEXT_MT))
         vdate = datetime.today().strftime("%y%m%d")
         uumid = random_string("UUM", 25)
-        corr = uumid[1:9] + uumid[8:11]
+        corr = uumid[1:9] + uumid[9:11]
         evt_ref = f"CR{random.randint(1,100):03d}" 
         uid = str(uuid.uuid4())[:12]
 
         return uumid, None, None, mt, vdate, corr, evt_ref, uid
     
     # ------------ COMMON SCENARIOS ---------------
-    # Scenario 1: One-to-one (5 records)
-    for _ in range(5):
+    # Scenario 1: One-to-one (10 records)
+    for _ in range(30):
         uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
         base_time = datetime.now()
         swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario1", base_time.strftime("%d-%m-%Y %H:%M:%S")))
         pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario1", base_time.strftime("%H:%M:%S")))
 
     # Scenario 2: SWIFT only
-    uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
-    swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario2"))
+    for _ in range(2):
+        uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
+        swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario2"))
 
     # Scenario 3: PP only
-    uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
-    pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario3"))
+    for _ in range(2):
+        uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
+        pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario3"))
 
     # Scenario 4: Two PP vs one SWIFT
-    uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
-    base_time = datetime.now()
-    swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario4", base_time.strftime("%d-%m-%Y %H:%M:%S")))
-    pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario4", (base_time+timedelta(seconds=10)).strftime("%H:%M:%S")))
-    pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, None, uid, "Scenario4", (base_time+timedelta(seconds=20)).strftime("%H:%M:%S")))
+    for _ in range(2):
+        uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
+        base_time = datetime.now()
+        swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario4", base_time.strftime("%d-%m-%Y %H:%M:%S")))
+        pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario4", (base_time+timedelta(seconds=10)).strftime("%H:%M:%S")))
+        pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, None, uid, "Scenario4", (base_time+timedelta(seconds=20)).strftime("%H:%M:%S")))
 
     # Scenario 5: Two SWIFT vs one PP
-    uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
-    base_time = datetime.now()
-    pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario5", base_time.strftime("%H:%M:%S")))
-    swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario5", (base_time).strftime("%d-%m-%Y %H:%M:%S")))
-    swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario5", (base_time).strftime("%d-%m-%Y %H:%M:%S")))
+    for _ in range(5):
+        uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
+        base_time = datetime.now()
+        pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario5", base_time.strftime("%H:%M:%S")))
+        swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario5", (base_time).strftime("%d-%m-%Y %H:%M:%S")))
+        swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario5", (base_time).strftime("%d-%m-%Y %H:%M:%S")))
 
     # Scenario 6: Two PP without SWIFT
-    uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
-    base_time = datetime.now()
-    alt_evt_ref = random.choice([f"CR{str(i).zfill(3)}" for i in range(1, 101) if f"CR{str(i).zfill(3)}" != evt_ref])
+    for _ in range(5):
+    
+        uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
+        base_time = datetime.now()
+        alt_evt_ref = random.choice([f"CR{str(i).zfill(3)}" for i in range(1, 101) if f"CR{str(i).zfill(3)}" != evt_ref])
 
-    pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario6", base_time.strftime("%H:%M:%S")))
-    pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, alt_evt_ref, uid, "Scenario6", (base_time+timedelta(seconds=30)).strftime("%H:%M:%S")))
+        pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario6", base_time.strftime("%H:%M:%S")))
+        pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, alt_evt_ref, uid, "Scenario6", (base_time+timedelta(seconds=30)).strftime("%H:%M:%S")))
 
     # Scenario 7: One PP with two SWIFT
-    uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
-    base_time = datetime.now()
-    pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario7", base_time.strftime("%H:%M:%S")))
-    swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario7", (base_time).strftime("%d-%m-%Y %H:%M:%S")))
-    swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario7", (base_time).strftime("%d-%m-%Y %H:%M:%S")))
+    for _ in range(2):
+
+        uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
+        base_time = datetime.now()
+        pp_records.append(make_pp(uumid, amt, ccy, mt, vdate, corr, evt_ref, uid, "Scenario7", base_time.strftime("%H:%M:%S")))
+        swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario7", (base_time).strftime("%d-%m-%Y %H:%M:%S")))
+        swift_records.append(make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario7", (base_time).strftime("%d-%m-%Y %H:%M:%S")))
 
     # ---------------- Free-text Scenarios ----------------
 
-    # freeScenario1: One-to-one
-    for _ in range(2):
+    # freeScenario1: One-to-one (RECONCILED)
+    for _ in range(20):
         uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = free_common_fields()
         base_time = datetime.now()
         swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario1", base_time.strftime("%d-%m-%Y %H:%M:%S")))
         pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, evt_ref, uid, "freeScenario1", base_time.strftime("%H:%M:%S")))
 
-    # freeScenario2: One PP vs two SWIFT
-    uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = free_common_fields()
-    base_time = datetime.now()
-    swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario2", base_time.strftime("%d-%m-%Y %H:%M:%S")))
-    swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario2", base_time.strftime("%d-%m-%Y %H:%M:%S")))
-    pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, evt_ref, uid, "freeScenario2", base_time.strftime("%H:%M:%S")))
+    # freeScenario2: One PP vs two SWIFT (RECONCILED)
+    for _ in range(10):
+
+        uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = free_common_fields()
+        base_time = datetime.now()
+        swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario2", base_time.strftime("%d-%m-%Y %H:%M:%S")))
+        swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario2", base_time.strftime("%d-%m-%Y %H:%M:%S")))
+        pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, evt_ref, uid, "freeScenario2", base_time.strftime("%H:%M:%S")))
 
     # freeScenario3: Only in PP
-    uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = free_common_fields()
-    base_time = datetime.now()
-    pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, evt_ref, uid, "freeScenario3", base_time.strftime("%H:%M:%S")))
+    for _ in range(2):
+
+        uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = free_common_fields()
+        base_time = datetime.now()
+        pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, evt_ref, uid, "freeScenario3", base_time.strftime("%H:%M:%S")))
 
     # freeScenario4: Two in PP vs one SWIFT
-    uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = free_common_fields()
-    base_time = datetime.now()
-    pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, evt_ref, uid, "freeScenario4", base_time.strftime("%H:%M:%S")))
-    pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, None, uid, "freeScenario4", (base_time+timedelta(seconds=15)).strftime("%H:%M:%S")))
-    swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario4", base_time.strftime("%d-%m-%Y %H:%M:%S")))
+    for _ in range(5):
+
+        uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = free_common_fields()
+        base_time = datetime.now()
+        pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, evt_ref, uid, "freeScenario4", base_time.strftime("%H:%M:%S")))
+        pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, None, uid, "freeScenario4", (base_time+timedelta(seconds=15)).strftime("%H:%M:%S")))
+        swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario4", base_time.strftime("%d-%m-%Y %H:%M:%S")))
 
     # freeScenario5: Two PP vs two SWIFT
-    uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = free_common_fields()
-    base_time = datetime.now()
-    alt_evt_ref = random.choice([f"CR{str(i).zfill(3)}" for i in range(1, 101) if f"CR{str(i).zfill(3)}" != evt_ref])
+    for _ in range(2):
 
-    pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, evt_ref, uid, "freeScenario5", base_time.strftime("%H:%M:%S")))
-    pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, alt_evt_ref, uid, "freeScenario5", (base_time+timedelta(seconds=10)).strftime("%H:%M:%S")))
-    swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario5", base_time.strftime("%d-%m-%Y %H:%M:%S")))
-    swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario5", base_time.strftime("%d-%m-%Y %H:%M:%S")))
+        uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = free_common_fields()
+        base_time = datetime.now()
+        alt_evt_ref = random.choice([f"CR{str(i).zfill(3)}" for i in range(1, 101) if f"CR{str(i).zfill(3)}" != evt_ref])
+
+        pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, evt_ref, uid, "freeScenario5", base_time.strftime("%H:%M:%S")))
+        pp_records.append(make_pp(uumid, None, None, mt, vdate, corr, alt_evt_ref, uid, "freeScenario5", (base_time+timedelta(seconds=10)).strftime("%H:%M:%S")))
+        swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario5", base_time.strftime("%d-%m-%Y %H:%M:%S")))
+        swift_records.append(make_swift(uumid, None, None, mt, vdate, corr, "freeScenario5", base_time.strftime("%d-%m-%Y %H:%M:%S")))
 
     # freeScenario6: Two in PP without SWIFT
     uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = free_common_fields()
@@ -255,15 +271,15 @@ def generate_scenarios():
 
     # ---------------- Non Exposure 720-721 ----------------
 
-    # one to one matching
-    for _ in range(3):
+    # one to one matching (RECONCILED)
+    for _ in range(20):
         uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
         base_time = datetime.now()
         swift_records.append(make_swift(uumid, amt, ccy, "720", vdate, corr, "720Scenario1", base_time.strftime("%d-%m-%Y %H:%M:%S")))
         pp_records.append(make_pp(uumid, amt, ccy, "720", vdate, corr, evt_ref, uid, "720Scenario1", base_time.strftime("%H:%M:%S")))
 
-    # one to many matching
-    for _ in range(2):
+    # one to many matching (RECONCILED)
+    for _ in range(10):
         uumid, amt, ccy, mt, vdate, corr, evt_ref, uid = common_fields()
         base_time = datetime.now()
         pp_records.append(make_pp(uumid, amt, ccy, "720", vdate, corr, evt_ref, uid, "720Scenario2", base_time.strftime("%H:%M:%S")))
@@ -340,8 +356,8 @@ def generate_scenarios():
 
 
 swift_df, pp_df = generate_scenarios()
-swift_df.to_excel("2_WAY_DATA/swift_2_way_f.xlsx", index=False)
-pp_df.to_excel("2_WAY_DATA/pp_2_way_f.xlsx", index=False)
+swift_df.to_excel("2_WAY_DATA/swift_2_way_data.xlsx", index=False)
+pp_df.to_excel("2_WAY_DATA/pp_2_way_data.xslx", index=False)
 
-print("SUCCESSFULLY!! Generated SWIFT & PP data with all scenarios.")
+print("HURRAY!! LJ,SUCESSFULLY Generated SWIFT & PP data with all scenarios.")
 
