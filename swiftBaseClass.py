@@ -146,7 +146,7 @@ class swiftBaseClass:
 
         for i in range(10):
             uumid, amt, ccy, mt, vdate, corr = self.exposure_details()
-            cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 1", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+            # cbs_records.append(self.make_cbs(uumid, amt, ccy, vdate, "Scenario 1", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             pp_records.append(self.make_pp(uumid, amt, ccy, mt, vdate, corr, "Scenario 1", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
             swift_records.append(self.make_swift(uumid, amt, ccy, mt, vdate, corr, "Scenario 1", datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
 
@@ -154,6 +154,7 @@ class swiftBaseClass:
 
     def generate_file_names(self):
         cbs_file_name = "3WAY_TRADE_CBS_GL_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".txt"
+        cbs_lim_file_name = "3WAY_TRADE_LIM" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".txt"
         swift_file_name = "SWIFT_GL_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".xlsx"
         pp_file_name = "2WAY_PRODUCT_PROCESSOR_GL_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".txt"
-        return cbs_file_name, swift_file_name, pp_file_name
+        return cbs_file_name, cbs_lim_file_name, swift_file_name, pp_file_name
