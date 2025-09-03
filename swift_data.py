@@ -12,13 +12,15 @@ if __name__ == "__main__":
     cbs_df2, swift_df2, pp_df2 = many103generator.generate_records()
     cbs_df3, swift_df3, pp_df3 = many7XXgenerator.generate_records()
 
-    cbs_df = pd.concat([cbs_df1, cbs_df2, cbs_df3], ignore_index=True)
+    cbs_df = pd.concat([cbs_df1, cbs_df2], ignore_index=True)
+    cbs_lim_df = pd.concat([cbs_df3], ignore_index=True)
     swift_df = pd.concat([swift_df1, swift_df2, swift_df3], ignore_index=True)
     pp_df = pd.concat([pp_df1, pp_df2, pp_df3], ignore_index=True)
 
-    cbs_file_name, swift_file_name, pp_file_name = happygenerator.generate_file_names()
+    cbs_file_name, cbs_lim_file_name, swift_file_name, pp_file_name = happygenerator.generate_file_names()
 
     cbs_df.to_csv(cbs_file_name, index=False, sep="|")
+    cbs_lim_df.to_csv(cbs_lim_file_name, index=False, sep="|")
     pp_df.to_csv(pp_file_name, index=False, sep="|")
     swift_df.to_excel(swift_file_name, index=False)
 
